@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 20250130-002-create-client-sequence
+      id: 002-create-client-sequence
       author: litvas
       context: sequence
       changes:
