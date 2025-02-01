@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20250130-002-create-client-sequence
+      author: litvas
+      context: sequence
+      changes:
+        - createSequence:
+            sequenceName: client_sequence
+            incrementBy: 50
+            minValue: 100
