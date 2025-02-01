@@ -1,0 +1,4 @@
+CREATE TABLE menu (
+    menu_id BIGSERIAL PRIMARY KEY,
+    type VARCHAR(255) NOT NULL
+);

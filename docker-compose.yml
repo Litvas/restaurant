@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+  menu-db:
+    image: postgres:16
+    restart: always
+    shm_size: 50mb
+    container_name: menu-db
+    env_file:
+      - menu-service/.env
+    ports:
+      - "5440:5440"
+

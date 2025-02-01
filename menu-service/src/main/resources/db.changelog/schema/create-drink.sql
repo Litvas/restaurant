@@ -1,0 +1,7 @@
+CREATE TABLE drink (
+    drink_id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    type VARCHAR(255) NOT NULL,
+    menu_id BIGINT NOT NULL,
+    FOREIGN KEY (menu_id) REFERENCES menu(menu_id) ON DELETE CASCADE
+);
