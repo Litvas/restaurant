@@ -1,4 +1,4 @@
 rootProject.name = 'restaurant'
 
 include 'menu-service'
-include 'menu-service'
+include 'clientservice'
