@@ -16,7 +16,7 @@ public class ClientController {
     private final ClientService clientService;
 
     @GetMapping
-    public ResponseEntity<Object> getClientByInnerId(@RequestParam String innerId) {
+    public ResponseEntity<Object> getClientByInnerId(@RequestParam(required = true) String innerId) {
         return ResponseEntity.ok().body(Optional.ofNullable(clientService.getClientByInnerId(innerId)).orElse("Not found"));
     }
 

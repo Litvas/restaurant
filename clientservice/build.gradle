@@ -37,7 +37,3 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api'
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'
 }
-
-tasks.named('test') {
-    useJUnitPlatform()
-}
