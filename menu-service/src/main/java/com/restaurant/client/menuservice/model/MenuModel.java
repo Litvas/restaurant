@@ -6,28 +6,28 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.Set;
 
 import static com.restaurant.client.menuservice.model.constant.AllModelConstant.*;
 
 @Getter
 @Setter
 @Entity
-@Table(name = MENU_TABLE_NAME)
+@Table(name = TABLE_MENU)
 @NoArgsConstructor
 public class MenuModel {
     @Id
-    @Column(name = MENU_ID)
+    @Column(name = FIELD_MENU_ID)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long menuId;
 
-    @Column(name = MENU_TYPE)
+    @Column(name = FIELD_MENU_TYPE)
     @Enumerated(EnumType.STRING)
     private MenuType dietMenuType;
 
-    @OneToMany(mappedBy = MENU_TABLE_NAME, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
-    private List<DishModel> dishes;
+    @OneToMany(mappedBy = TABLE_MENU, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
+    private Set<DishModel> dishes;
 
-    @OneToMany(mappedBy = MENU_TABLE_NAME, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
-    private List<DrinkModel> drinks;
+    @OneToMany(mappedBy = TABLE_MENU, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
+    private Set<DrinkModel> drinks;
 }
