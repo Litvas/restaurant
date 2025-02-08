@@ -22,8 +22,7 @@ public class MenuModel {
     private Long menuId;
 
     @Column(name = FIELD_MENU_TYPE)
-    @Enumerated(EnumType.STRING)
-    private MenuType dietMenuType;
+    private String dietMenuType;
 
     @OneToMany(mappedBy = TABLE_MENU, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
     private Set<DishModel> dishes;

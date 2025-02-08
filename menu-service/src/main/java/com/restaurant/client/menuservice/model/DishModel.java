@@ -34,8 +34,7 @@ public class DishModel {
 
     @NotBlank
     @Column(name = FIELD_DISH_TYPE)
-    @Enumerated(EnumType.STRING)
-    private DishType dishType;
+    private String dishType;
 
     @ManyToOne
     @JoinColumn(name = FIELD_MENU_ID)

@@ -30,9 +30,9 @@ public class DrinkModel {
     @Column(name = FIELD_DRINK_NAME)
     private String drinkName;
 
+    @NotBlank
     @Column(name = FIELD_DRINK_TYPE)
-    @Enumerated(value = EnumType.STRING)
-    private DrinkType drinkType;
+    private String drinkType;
 
     @ManyToOne
     @JoinColumn(name = FIELD_MENU_ID)
