@@ -1,6 +1,6 @@
-package com.restaurant.client.menuservice.dto;
+package com.restaurant.client.menuservice.dto.controller;
 
-import com.restaurant.client.menuservice.dto.factory.DataDtoFactoryTest;
+import com.restaurant.client.menuservice.dto.DataDtoFactoryTest;
 import com.restaurant.client.menuservice.model.enums.DishType;
 import com.restaurant.client.menuservice.model.enums.DrinkType;
 import com.restaurant.client.menuservice.model.enums.MenuType;
@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Set;
 
-@Component("getMenuById")
-public class FullMenuDtoSuccessForGetMenuByIdTest implements DataDtoFactoryTest {
+@Component("controller-method-getMenuByType")
+public class FullMenuDtoSuccessByControllerMethodForGetMenuByTypeTest implements DataDtoFactoryTest {
 
     @Override
     public FullMenuDto  createDataSuccess() {

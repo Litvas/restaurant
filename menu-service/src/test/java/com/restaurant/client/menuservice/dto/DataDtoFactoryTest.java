@@ -1,4 +1,4 @@
-package com.restaurant.client.menuservice.dto.factory;
+package com.restaurant.client.menuservice.dto;
 
 import com.restaurant.client.menuservice.payload.FullMenuDto;
 import com.restaurant.client.menuservice.payload.ShortMenuDto;

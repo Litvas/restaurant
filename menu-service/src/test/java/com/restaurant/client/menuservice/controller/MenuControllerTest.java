@@ -1,6 +1,6 @@
 package com.restaurant.client.menuservice.controller;
 
-import com.restaurant.client.menuservice.dto.factory.DataDtoFactoryTest;
+import com.restaurant.client.menuservice.dto.DataDtoFactoryTest;
 import com.restaurant.client.menuservice.exception.MenuNotFoundException;
 import com.restaurant.client.menuservice.service.MenuService;
 import org.junit.jupiter.api.BeforeAll;
@@ -26,15 +26,15 @@ public class MenuControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    @Qualifier("getAllMenu")
+    @Qualifier("controller-method-getAllMenu")
     private DataDtoFactoryTest beanGetAllMenu;
 
     @Autowired
-    @Qualifier("getMenuById")
+    @Qualifier("controller-method-getMenuById")
     private DataDtoFactoryTest beanGetMenuById;
 
     @Autowired
-    @Qualifier("getMenuByType")
+    @Qualifier("controller-method-getMenuByType")
     private DataDtoFactoryTest beanGetMenuByType;
 
     @MockitoBean
