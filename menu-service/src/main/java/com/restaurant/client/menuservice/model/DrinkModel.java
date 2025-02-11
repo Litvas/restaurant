@@ -23,7 +23,7 @@ public class DrinkModel {
     @Id
     @Column(name = FIELD_DRINK_ID)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long drinkIdl;
+    private Long drinkId;
 
     @NotBlank
     @Size(max = 255)
