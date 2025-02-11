@@ -1,6 +1,8 @@
 package com.restaurant.client.clientservice.services.impl;
 
 import com.restaurant.client.clientservice.domain.Client;
+import com.restaurant.client.clientservice.dtos.ClientDTO;
+import com.restaurant.client.clientservice.mappers.ClientMapper;
 import com.restaurant.client.clientservice.repositories.ClientRepository;
 import com.restaurant.client.clientservice.services.ClientService;
 import lombok.RequiredArgsConstructor;
@@ -8,17 +10,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class ClientServiceImpl implements ClientService<Client> {
+public class ClientServiceImpl implements ClientService<ClientDTO> {
 
     private final ClientRepository clientRepository;
-
-    public Client getClientByInnerId(String innerId) {
-        return clientRepository.getClientByInnerId(innerId);
+    private final ClientMapper clientMapper;
+    public ClientDTO getClientByInnerId(String innerId) {
+        return clientMapper.toClientDTO(clientRepository.getClientByInnerId(innerId));
     }
 
     @Override
-    public Client createClient(Client client) {
-        return clientRepository.save(client);
+    public ClientDTO createClient(Client client) {
+        return clientMapper.toClientDTO(clientRepository.save(client));
     }
 
 }

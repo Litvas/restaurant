@@ -30,9 +30,12 @@ dependencies {
     implementation 'org.liquibase:liquibase-core'
     implementation 'org.hibernate.validator:hibernate-validator-annotation-processor'
     implementation 'jakarta.validation:jakarta.validation-api'
+    implementation group: 'org.mapstruct', name: 'mapstruct', version: '1.6.3'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:0.2.0"
+    annotationProcessor "org.mapstruct:mapstruct-processor:1.6.3"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.junit.jupiter:junit-jupiter-api'
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'
