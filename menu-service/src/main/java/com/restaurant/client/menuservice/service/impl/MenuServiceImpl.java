@@ -1,5 +1,6 @@
 package com.restaurant.client.menuservice.service.impl;
 
+import com.restaurant.client.menuservice.annotation.Loggable;
 import com.restaurant.client.menuservice.exception.MenuNotFoundException;
 import com.restaurant.client.menuservice.mapper.MenuMapper;
 import com.restaurant.client.menuservice.model.MenuModel;
@@ -19,6 +20,7 @@ public class MenuServiceImpl implements MenuService {
     private final MenuRepository menuRepository;
     private final MenuMapper menuMapper;
 
+    @Loggable
     @Override
     public List<ShortMenuDto> getAllMenu() throws MenuNotFoundException{
         List<ShortMenuDto> menuDto = menuMapper.shortMenuDtoList(menuRepository.findAll());
@@ -28,6 +30,7 @@ public class MenuServiceImpl implements MenuService {
         return menuDto;
     }
 
+    @Loggable
     @Override
     public FullMenuDto getMenuById(Long id) throws MenuNotFoundException{
         Optional<MenuModel> optionalMenuModel = menuRepository.findMenuModelByMenuId(id);
@@ -37,6 +40,7 @@ public class MenuServiceImpl implements MenuService {
         return menuMapper.fullMenuDto(optionalMenuModel.get());
     }
 
+    @Loggable
     @Override
     public FullMenuDto getMenuByType(String type) throws MenuNotFoundException {
         Optional<MenuModel> optionalMenuModel = menuRepository.findMenuModelByDietMenuType(type);
