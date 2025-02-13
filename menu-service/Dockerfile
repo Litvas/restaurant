@@ -3,5 +3,5 @@ VOLUME /tmp
 WORKDIR .
 COPY ./ ./
 COPY build/*.jar menu-service.jar
-EXPOSE 8080
+EXPOSE 8081
 ENTRYPOINT ["java","-jar","/menu-service.jar"]

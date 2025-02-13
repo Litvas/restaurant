@@ -14,18 +14,18 @@ import static com.restaurant.client.menuservice.model.constant.AllModelConstant.
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = INGREDIENT_TABLE_NAME, uniqueConstraints = {
-        @UniqueConstraint(columnNames = INGREDIENT_NAME)
+@Table(name = TABLE_INGREDIENT, uniqueConstraints = {
+        @UniqueConstraint(columnNames = FIELD_INGREDIENT_NAME)
 })
 public class IngredientModel {
     @Id
-    @Column(name = INGREDIENT_ID)
+    @Column(name = FIELD_INGREDIENT_ID)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ingredientId;
 
     @NotBlank
     @Size(max = 255)
-    @Column(name = INGREDIENT_NAME)
+    @Column(name = FIELD_INGREDIENT_NAME)
     private String ingredientName;
 
     @NotBlank
@@ -34,17 +34,17 @@ public class IngredientModel {
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinTable(
-            name = DISH_NAME,
-            joinColumns = @JoinColumn(name = INGREDIENT_ID),
-            inverseJoinColumns = @JoinColumn(name = DISH_ID)
+            name = TABLE_DISH_INGREDIENT,
+            joinColumns = @JoinColumn(name = FIELD_INGREDIENT_ID),
+            inverseJoinColumns = @JoinColumn(name = FIELD_DISH_ID)
     )
     private Set<DishModel> dishes;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinTable(
-            name = DRINK_NAME,
-            joinColumns = @JoinColumn(name = INGREDIENT_ID),
-            inverseJoinColumns = @JoinColumn(name = DRINK_NAME)
+            name = TABLE_DRINK_INGREDIENT,
+            joinColumns = @JoinColumn(name = FIELD_INGREDIENT_ID),
+            inverseJoinColumns = @JoinColumn(name = FIELD_DRINK_ID)
     )
     private Set<DrinkModel> drinks;
 }

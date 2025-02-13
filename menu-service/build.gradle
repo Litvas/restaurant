@@ -23,16 +23,39 @@ repositories {
 	mavenCentral()
 }
 
+ext {
+	mapstructVersion = "1.6.3"
+	lombokVersion = "1.18.32"
+	liquibaseVersion = "4.23.2"
+}
+
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.liquibase:liquibase-core:4.23.2'
-	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'org.postgresql:postgresql'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	// Spring Boot
+	implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+	implementation "org.springframework.boot:spring-boot-starter-validation"
+	implementation "org.springframework.boot:spring-boot-starter-web"
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
+
+	// Liquibase
+	implementation "org.liquibase:liquibase-core:$liquibaseVersion"
+
+	// MapStruct
+	implementation "org.mapstruct:mapstruct:$mapstructVersion"
+
+	// Lombok
+	compileOnly "org.projectlombok:lombok:$lombokVersion"
+	annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+	// MapStruct Annotation Processor
+	annotationProcessor "org.mapstruct:mapstruct-processor:$mapstructVersion"
+
+	// PostgreSQL
+	runtimeOnly "org.postgresql:postgresql"
+
+	// Testing
+	testImplementation 'com.h2database:h2'
+	testImplementation "org.springframework.boot:spring-boot-starter-test"
+	testRuntimeOnly "org.junit.platform:junit-platform-launcher"
 }
 
 tasks.named('test') {
