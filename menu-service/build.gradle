@@ -27,6 +27,7 @@ ext {
 	mapstructVersion = "1.6.3"
 	lombokVersion = "1.18.32"
 	liquibaseVersion = "4.23.2"
+	openApiVersion = "2.8.4"
 }
 
 dependencies {
@@ -35,6 +36,9 @@ dependencies {
 	implementation "org.springframework.boot:spring-boot-starter-validation"
 	implementation "org.springframework.boot:spring-boot-starter-web"
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
+
+	// Swagger {open-api} "http://localhost:8080/swagger-ui.html"
+	implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:$openApiVersion"
 
 	// Liquibase
 	implementation "org.liquibase:liquibase-core:$liquibaseVersion"
