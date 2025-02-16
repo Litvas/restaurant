@@ -1,11 +1,12 @@
 package com.restaurant.client.menuservice.model;
 
-import com.restaurant.client.menuservice.model.constant.AllModelConstant;
 import com.restaurant.client.menuservice.model.enums.DishType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+
+import java.util.List;
 
 import static com.restaurant.client.menuservice.model.constant.AllModelConstant.*;
 
@@ -14,17 +15,17 @@ import static com.restaurant.client.menuservice.model.constant.AllModelConstant.
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = DISH_TABLE_NAME, uniqueConstraints = {
-        @UniqueConstraint(columnNames = DISH_NAME)
+@Table(name = TABLE_DISH, uniqueConstraints = {
+        @UniqueConstraint(columnNames = FIELD_DISH_NAME)
 })
 public class DishModel {
     @Id
-    @Column(name = DISH_ID)
+    @Column(name = FIELD_DISH_ID)
     private Long dishId;
 
     @NotBlank
     @Size(max = 255)
-    @Column(name = DISH_NAME)
+    @Column(name = FIELD_DISH_NAME)
     private String dishName;
 
     @NotBlank
@@ -32,13 +33,14 @@ public class DishModel {
     private String picture;
 
     @NotBlank
-    @Column(name = DISH_TYPE)
-    private DishType dishType;
+    @Column(name = FIELD_DISH_TYPE)
+    private String dishType;
 
     @ManyToOne
-    @JoinColumn(name = MENU_ID)
+    @JoinColumn(name = FIELD_MENU_ID)
     private MenuModel menu;
 
-
+    @ManyToMany(mappedBy = MAPPED_BY_DISHES, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<IngredientModel> ingredients;
 
 }

@@ -1,0 +1,104 @@
+openapi: 3.0.1
+info:
+  title: Restaurant Menu Service API
+  description: API for managing restaurant menus
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8081/api
+    description: Local Development Server
+
+paths:
+  /menus:
+    get:
+      summary: Get all menus
+      operationId: getAllMenu
+      tags:
+        - Menu
+      responses:
+        "200":
+          description: List of menus (short version)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ShortMenuDto"
+
+  /menu_id/{menuId}:
+    get:
+      summary: Get menu by ID
+      operationId: getMenuById
+      tags:
+        - Menu
+      parameters:
+        - name: menuId
+          in: path
+          required: true
+          description: Unique ID of the menu
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Detailed menu information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FullMenuDto"
+        "404":
+          description: Menu not found
+
+  /menu_type:
+    get:
+      summary: Get menu by type
+      operationId: getMenuByType
+      tags:
+        - Menu
+      parameters:
+        - name: type
+          in: query
+          required: true
+          description: Type of the menu (VEGAN, VEGETARIAN, TRADITIONAL)
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Detailed menu by type
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FullMenuDto"
+        "400":
+          description: Invalid menu type
+
+components:
+  schemas:
+    ShortMenuDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+
+    FullMenuDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+          format: float
+        ingredients:
+          type: array
+          items:
+            type: string

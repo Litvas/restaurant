@@ -1,8 +1,64 @@
 databaseChangeLog:
-  # include schema
-  - includeAll:
-      path: ./db.changelog/schema
+  # Include schema changes
+  - changeSet:
+      id: 1
+      author: "true-false-try"
+      sqlFile:
+        path: db.changelog/schema/create-menu.sql
+  - changeSet:
+      id: 2
+      author: "true-false-try"
+      sqlFile:
+        path: db.changelog/schema/create-dish.sql
+  - changeSet:
+      id: 3
+      author: "true-false-try"
+      sqlFile:
+        path: db.changelog/schema/create-drink.sql
+  - changeSet:
+      id: 4
+      author: "true-false-try"
+      sqlFile:
+        path: db.changelog/schema/create-ingredient.sql
+  - changeSet:
+      id: 5
+      author: "true-false-try"
+      sqlFile:
+        path: db.changelog/schema/create-dish_ingredient.sql
+  - changeSet:
+      id: 6
+      author: "true-false-try"
+      sqlFile:
+        path: db.changelog/schema/create-drink_ingredient.sql
 
-  # include date
-  - includeAll:
-      path: ./db.changelog/data
+  # Include data insertions
+  - changeSet:
+      id: 7
+      author: "true-false-try"
+      sqlFile:
+        path: db.changelog/data/insert-menu.sql
+  - changeSet:
+      id: 8
+      author: "true-false-try"
+      sqlFile:
+        path: db.changelog/data/insert-dish.sql
+  - changeSet:
+      id: 9
+      author: "true-false-try"
+      sqlFile:
+        path: db.changelog/data/insert-drink.sql
+  - changeSet:
+      id: 10
+      author: "true-false-try"
+      sqlFile:
+        path: db.changelog/data/insert-ingredient.sql
+  - changeSet:
+      id: 11
+      author: "true-false-try"
+      sqlFile:
+        path: db.changelog/data/insert-dish_ingredient.sql
+  - changeSet:
+      id: 12
+      author: "true-false-try"
+      sqlFile:
+        path: db.changelog/data/insert-drink_ingredient.sql

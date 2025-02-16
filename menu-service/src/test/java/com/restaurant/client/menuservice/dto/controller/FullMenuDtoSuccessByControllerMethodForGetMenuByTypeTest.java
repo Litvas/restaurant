@@ -1,0 +1,69 @@
+package com.restaurant.client.menuservice.dto.controller;
+
+import com.restaurant.client.menuservice.dto.DataDtoFactoryTest;
+import com.restaurant.client.menuservice.model.enums.DishType;
+import com.restaurant.client.menuservice.model.enums.DrinkType;
+import com.restaurant.client.menuservice.model.enums.MenuType;
+import com.restaurant.client.menuservice.payload.FullMenuDto;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Set;
+
+@Component("controller-method-getMenuByType")
+public class FullMenuDtoSuccessByControllerMethodForGetMenuByTypeTest implements DataDtoFactoryTest {
+
+    @Override
+    public FullMenuDto  createDataSuccess() {
+        return FullMenuDto.builder()
+                .menuId(1L)
+                .dietMenuType(MenuType.TRADITIONAL_MENU.getType())
+                .dishes(createDishes())
+                .drinks(createDrinks())
+                .build();
+    }
+
+    private  Set<FullMenuDto.DishDto> createDishes() {
+        return Set.of(
+                FullMenuDto.DishDto.builder()
+                        .dishId(1L)
+                        .dishName("dishName")
+                        .dishType(DishType.DESSERT_DISH_TYPE.getType())
+                        .picture("/relative-path/dish.img")
+                        .ingredients(createDishIngredients())
+                        .build()
+        );
+    }
+
+    private  Set<FullMenuDto.DrinkDto> createDrinks() {
+        return Set.of(
+                FullMenuDto.DrinkDto.builder()
+                        .drinkId(1L)
+                        .drinkName("drinkName")
+                        .drinkName(DrinkType.ALCOHOL_DRINK.getType())
+                        .picture("/relative-path/drink.img")
+                        .ingredients(createDrinkIngredients())
+                        .build()
+        );
+    }
+
+    private  List<FullMenuDto.DishDto.IngredientDto> createDishIngredients() {
+        return List.of(
+                FullMenuDto.DishDto.IngredientDto.builder()
+                        .ingredientId(1L)
+                        .ingredientName("someDishName")
+                        .picture("/relative-path/dish/ingredient.img")
+                        .build()
+        );
+    }
+
+    private  List<FullMenuDto.DrinkDto.IngredientDto> createDrinkIngredients() {
+        return List.of(
+                FullMenuDto.DrinkDto.IngredientDto.builder()
+                        .ingredientId(2L)
+                        .ingredientName("someDrinkName")
+                        .picture("/relative-path/drink/ingredient.img")
+                        .build()
+        );
+    }
+}

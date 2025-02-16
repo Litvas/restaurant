@@ -6,6 +6,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.util.List;
+import java.util.Set;
+
 import static com.restaurant.client.menuservice.model.constant.AllModelConstant.*;
 
 @Getter
@@ -13,26 +16,33 @@ import static com.restaurant.client.menuservice.model.constant.AllModelConstant.
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = DRINK_TABLE_NAME, uniqueConstraints = {
-        @UniqueConstraint(columnNames = DRINK_NAME)
+@Table(name = TABLE_DRINK, uniqueConstraints = {
+        @UniqueConstraint(columnNames = FIELD_DRINK_NAME)
 })
 public class DrinkModel {
     @Id
-    @Column(name = DRINK_ID)
+    @Column(name = FIELD_DRINK_ID)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long drinkIdl;
+    private Long drinkId;
 
     @NotBlank
     @Size(max = 255)
-    @Column(name = DRINK_NAME)
+    @Column(name = FIELD_DRINK_NAME)
     private String drinkName;
 
-    @Column(name = DRINK_TYPE)
-    @Enumerated(value = EnumType.STRING)
-    private DrinkType drinkType;
+    @NotBlank
+    @Size(max = 255)
+    private String picture;
+
+    @NotBlank
+    @Column(name = FIELD_DRINK_TYPE)
+    private String drinkType;
 
     @ManyToOne
-    @JoinColumn(name = MENU_ID)
+    @JoinColumn(name = FIELD_MENU_ID)
     private MenuModel menu;
+
+    @ManyToMany(mappedBy = MAPPED_BY_DRINKS, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<IngredientModel> ingredients;
 
 }
