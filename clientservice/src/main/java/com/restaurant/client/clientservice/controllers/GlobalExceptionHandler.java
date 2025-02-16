@@ -20,7 +20,7 @@ import java.util.List;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ClientNotFoundException.class)
-    public ResponseEntity<ExceptionResponseDTO> handleMenuNotFoundException(ClientNotFoundException ex) {
+    public ResponseEntity<ExceptionResponseDTO> handleClientNotFoundException(ClientNotFoundException ex) {
         ExceptionResponseDTO exceptionResponseDto = new ExceptionResponseDTO(
                 String.valueOf(HttpStatus.NOT_FOUND.value()),
                 HttpStatus.NOT_FOUND.getReasonPhrase(),
