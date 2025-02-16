@@ -9,3 +9,6 @@ logging:
     org:
       springframework:
         web: DEBUG
+
+elasticsearch:
+  connection.url: elasticsearch:9200
