@@ -27,7 +27,7 @@ public class Client {
     @Pattern(regexp = "^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]\\d{3}[\\s.-]\\d{4}$")
     private String phone;
 
-    @NotBlank
+    @NotBlank(message = "Field 'username' cannot be null or empty")
     private String username;
 
     private Long bonuses;

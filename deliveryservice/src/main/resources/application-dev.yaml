@@ -6,10 +6,10 @@ spring:
     password: ${DB_PASSWORD}
   liquibase:
     change-log: classpath:/db/changelog/changelog-${ENV}.yaml
-    drop-first: false
+    drop-first: true
   jpa:
     hibernate:
       ddl-auto: validate
 
 server:
-  port: 8082
+  port: 8083

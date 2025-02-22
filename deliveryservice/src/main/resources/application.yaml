@@ -1,6 +1,6 @@
 spring:
   application:
-    name: clientservice
+    name: deliveryservice
   profiles:
     active: ${ENV}
   mvc:
