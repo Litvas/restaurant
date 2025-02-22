@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: deliveryservice
+  profiles:
+    active: ${ENV}
+  mvc:
+    log-request-details: true
+
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+
+elasticsearch:
+  connection.url: elasticsearch:9200

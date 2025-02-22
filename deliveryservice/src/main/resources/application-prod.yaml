@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/clients
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+  liquibase:
+    change-log: classpath:/db/changelog/changelog-${ENV}.yaml
+    drop-first: false
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+server:
+  port: 8083
