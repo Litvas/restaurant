@@ -1,0 +1,133 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20250223-001-create-start-tables
+      author: litvas
+      changes:
+        - createSequence:
+            sequenceName: delivery_sequence
+        - createSequence:
+            sequenceName: address_sequence
+        - createSequence:
+            sequenceName: locality_sequence
+        - createSequence:
+            sequenceName: street_sequence
+
+  - changeSet:
+      id: 20250223-001-create-start-tables
+      author: litvas
+      changes:
+        - createTable:
+            tableName: address
+            columns:
+              - column:
+                  name: id
+                  type: VARCHAR(255)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: locality_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_address_locality
+                    references: locality(id)
+              - column:
+                  name: street_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_address_street
+                    references: street(id)
+              - column:
+                  name: number
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_private_home
+                  type: BOOLEAN
+                  defaultValueBoolean: true
+              - column:
+                  name: corpus
+                  type: VARCHAR(255)
+              - column:
+                  name: entrance
+                  type: VARCHAR(255)
+              - column:
+                  name: floor
+                  type: VARCHAR(255)
+              - column:
+                  name: apartment
+                  type: VARCHAR(255)
+
+  - changeSet:
+      id: 20250223-001-create-start-tables
+      author: litvas
+      changes:
+        - createTable:
+            tableName: locality
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: locality_type
+                  type: VARCHAR(50)
+                  defaultValue: "CITY"
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 20250223-001-create-start-tables
+      author: litvas
+      changes:
+        - createTable:
+            tableName: street
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: locality_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_street_locality
+                    references: locality(id)
+
+  - changeSet:
+      id: 20250223-001-create-start-tables
+      author: litvas
+      changes:
+        - createTable:
+            tableName: delivery
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: address_id
+                  type: VARCHAR(255)
+                  constraints:
+                    foreignKeyName: fk_delivery_address
+                    references: address(id)
