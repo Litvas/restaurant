@@ -4,7 +4,6 @@ import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.env.EnvironmentPostProcessor;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.MapPropertySource;
 
@@ -27,6 +26,10 @@ public class DotenvPostProcessor implements EnvironmentPostProcessor {
             System.setProperty(entry.getKey(), entry.getValue());
         });
         environment.getPropertySources().addLast(new MapPropertySource("dotenvProperties", envMap));
-        envMap.forEach((k, v) -> System.out.println("Key: " + k + " Value: " + v));
+
+        /**
+         * Used only for debug
+         * envMap.forEach((k, v) -> System.out.println("Key: " + k + " Value: " + v));
+         * */
     }
 }
