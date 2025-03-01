@@ -19,13 +19,13 @@ public class FullMenuDto {
     Long menuId;
     @JsonSetter("type")
     String dietMenuType;
-    Set<Dish> dishes;
-    Set<Drink> drinks;
+    Set<DishDto> dishes;
+    Set<DrinkDto> drinks;
 
     @Data
     @Builder
     @FieldDefaults(level = AccessLevel.PRIVATE)
-    public static class Dish {
+    public static class DishDto {
         @JsonIgnore
         @JsonSetter("dish_id")
         Long dishId;
@@ -36,12 +36,12 @@ public class FullMenuDto {
 
         @JsonSetter("type")
         String dishType;
-        List<Ingredient> ingredients;
+        List<IngredientDto> ingredients;
 
         @Data
         @Builder
         @FieldDefaults(level = AccessLevel.PRIVATE)
-        public static class Ingredient {
+        public static class IngredientDto {
             @JsonIgnore
             @JsonSetter("ingredient_id")
             Long ingredientId;
@@ -55,7 +55,7 @@ public class FullMenuDto {
     @Data
     @Builder
     @FieldDefaults(level = AccessLevel.PRIVATE)
-    public static class Drink {
+    public static class DrinkDto {
         @JsonIgnore
         @JsonSetter("drink_id")
         Long drinkId;
@@ -65,13 +65,13 @@ public class FullMenuDto {
         String picture;
 
         @JsonSetter("type")
-        String type;
-        List<Ingredient> ingredients;
+        String drinkType;
+        List<IngredientDto> ingredients;
 
         @Data
         @Builder
         @FieldDefaults(level = AccessLevel.PRIVATE)
-        public static class Ingredient {
+        public static class IngredientDto {
             @JsonIgnore
             @JsonSetter("ingredient_id")
             Long ingredientId;

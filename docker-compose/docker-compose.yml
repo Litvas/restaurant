@@ -1,0 +1,94 @@
+services:
+  menu-service:
+    image: menu-service
+    build:
+      context: ../menu-service
+      dockerfile: ../menu-service/Dockerfile
+    ports:
+      - "8081:8081"
+    env_file:
+      - ../menu-service/.env
+    depends_on:
+      - menu-db
+      - elasticsearch
+      - logstash
+
+  menu-db:
+    image: postgres:16
+    restart: always
+    shm_size: 50mb
+    container_name: menu-db
+    environment:
+      POSTGRES_DB: menu
+    ports:
+      - "5432:5432"
+    env_file:
+      - ../menu-service/.env
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $POSTGRES_USER -d $POSTGRES_DB" ]
+      interval: 5s
+      retries: 5
+      timeout: 3s
+
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.17.0
+    container_name: elasticsearch
+    environment:
+      - node.name=elasticsearch
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - xpack.security.enabled=false
+      - xpack.security.audit.enabled=true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    networks:
+      - elk
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.17.0
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:8.17.2
+    container_name: logstash
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    volumes:
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
+    networks:
+      - elk
+    ports:
+      - "9600:9600"
+      - "5044:5044"
+    depends_on:
+      - elasticsearch
+
+volumes:
+  elasticsearch-data:
+    driver: local
+
+networks:
+  elk:
+    driver: bridge
+
+
+
+
+
+

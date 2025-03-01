@@ -1,0 +1,21 @@
+<configuration>
+    <property name="logstashDestination" value="${logstash.destination}" />
+    <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>logstash:9600</destination>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>{"[@metadata][service]": "menu-service", "[@metadata][log_level]": "%level"}</customFields>
+        </encoder>
+    </appender>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="logstash"/>
+        <appender-ref ref="CONSOLE" />
+    </root>
+
+</configuration>

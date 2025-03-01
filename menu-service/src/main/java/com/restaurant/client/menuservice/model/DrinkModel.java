@@ -31,6 +31,10 @@ public class DrinkModel {
     private String drinkName;
 
     @NotBlank
+    @Size(max = 255)
+    private String picture;
+
+    @NotBlank
     @Column(name = FIELD_DRINK_TYPE)
     private String drinkType;
 

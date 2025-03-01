@@ -23,9 +23,9 @@ public class FullMenuDtoSuccessByServiceMethodForGetMenuByIdTest implements Data
                 .build();
     }
 
-    private  Set<FullMenuDto.Dish> createDishes() {
+    private  Set<FullMenuDto.DishDto> createDishes() {
         return Set.of(
-                FullMenuDto.Dish.builder()
+                FullMenuDto.DishDto.builder()
                         .dishId(1L)
                         .dishName("dishName")
                         .dishType(DishType.DESSERT_DISH_TYPE.getType())
@@ -35,9 +35,9 @@ public class FullMenuDtoSuccessByServiceMethodForGetMenuByIdTest implements Data
         );
     }
 
-    private  Set<FullMenuDto.Drink> createDrinks() {
+    private  Set<FullMenuDto.DrinkDto> createDrinks() {
         return Set.of(
-                FullMenuDto.Drink.builder()
+                FullMenuDto.DrinkDto.builder()
                         .drinkId(1L)
                         .drinkName("drinkName")
                         .drinkName(DrinkType.ALCOHOL_DRINK.getType())
@@ -47,9 +47,9 @@ public class FullMenuDtoSuccessByServiceMethodForGetMenuByIdTest implements Data
         );
     }
 
-    private  List<FullMenuDto.Dish.Ingredient> createDishIngredients() {
+    private  List<FullMenuDto.DishDto.IngredientDto> createDishIngredients() {
         return List.of(
-                FullMenuDto.Dish.Ingredient.builder()
+                FullMenuDto.DishDto.IngredientDto.builder()
                         .ingredientId(1L)
                         .ingredientName("someDishName")
                         .picture("/relative-path/dish/ingredient.img")
@@ -57,9 +57,9 @@ public class FullMenuDtoSuccessByServiceMethodForGetMenuByIdTest implements Data
         );
     }
 
-    private  List<FullMenuDto.Drink.Ingredient> createDrinkIngredients() {
+    private  List<FullMenuDto.DrinkDto.IngredientDto> createDrinkIngredients() {
         return List.of(
-                FullMenuDto.Drink.Ingredient.builder()
+                FullMenuDto.DrinkDto.IngredientDto.builder()
                         .ingredientId(2L)
                         .ingredientName("someDrinkName")
                         .picture("/relative-path/drink/ingredient.img")
