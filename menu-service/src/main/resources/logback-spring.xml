@@ -1,7 +1,7 @@
 <configuration>
     <property name="logstashDestination" value="${logstash.destination}" />
-    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>${logstashDestination}</destination>
+    <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>logstash:9600</destination>
         <encoder class="net.logstash.logback.encoder.LogstashEncoder">
             <customFields>{"[@metadata][service]": "menu-service", "[@metadata][log_level]": "%level"}</customFields>
         </encoder>
@@ -14,7 +14,7 @@
     </appender>
 
     <root level="INFO">
-        <appender-ref ref="LOGSTASH" />
+        <appender-ref ref="logstash"/>
         <appender-ref ref="CONSOLE" />
     </root>
 
