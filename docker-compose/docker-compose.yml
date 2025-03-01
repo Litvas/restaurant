@@ -15,9 +15,12 @@ services:
     networks:
       - elk
     depends_on:
-      - database
-      - elasticsearch
-      - logstash
+      database:
+        condition: service_started
+      elasticsearch:
+        condition: service_started
+      logstash:
+        condition: service_started
     links:
       - database
       - logstash
@@ -38,9 +41,12 @@ services:
     networks:
       - elk
     depends_on:
-      - database
-      - elasticsearch
-      - logstash
+      database:
+        condition: service_started
+      elasticsearch:
+        condition: service_started
+      logstash:
+        condition: service_started
     links:
       - database
       - logstash
