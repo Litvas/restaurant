@@ -18,7 +18,7 @@ public class DotenvPostProcessor implements EnvironmentPostProcessor {
         if (environment.acceptsProfiles(org.springframework.core.env.Profiles.of("test"))) {
             return;
         }
-        Dotenv dotenv = Dotenv.configure().directory("menu-service").load();
+        Dotenv dotenv = Dotenv.configure().load();
 
         Map<String, Object> envMap = new HashMap<>();
         dotenv.entries().forEach(entry -> {
