@@ -31,6 +31,7 @@ dependencies {
     implementation 'org.hibernate.validator:hibernate-validator'
     implementation 'jakarta.validation:jakarta.validation-api'
     implementation group: 'org.mapstruct', name: 'mapstruct', version: '1.6.3'
+    implementation "net.logstash.logback:logstash-logback-encoder:7.0"
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.projectlombok:lombok'

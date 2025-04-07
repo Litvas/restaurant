@@ -2,3 +2,4 @@ rootProject.name = 'restaurant'
 
 include 'menu-service'
 include 'clientservice'
+include 'deliveryservice'
