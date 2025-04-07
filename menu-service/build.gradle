@@ -48,6 +48,9 @@ dependencies {
 	// Swagger {open-api} "http://localhost:8080/swagger-ui.html"
 	implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:$openApiVersion"
 
+	// Swagger {open-api} "http://localhost:8080/swagger-ui.html"
+	implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:$openApiVersion"
+
 	// Liquibase
 	implementation "org.liquibase:liquibase-core:$liquibaseVersion"
 
