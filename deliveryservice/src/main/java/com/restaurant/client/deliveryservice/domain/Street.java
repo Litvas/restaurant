@@ -10,14 +10,15 @@ import lombok.Data;
 public class Street {
 
     @Id
-    @SequenceGenerator(name = "street_sequence", sequenceName = "street_sequence")
+    @SequenceGenerator(name = "street_sequence", sequenceName = "street_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "street_sequence")
     private Long id;
 
-    @Column(nullable = false)
+//    fix it
+    @Column(nullable = false, unique = true)
     private String name;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Locality locality;
 
 }

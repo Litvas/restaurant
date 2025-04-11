@@ -11,14 +11,14 @@ import org.hibernate.annotations.ColumnDefault;
 public class Address {
 
     @Id
-    @SequenceGenerator(name = "address_sequence", sequenceName = "address_sequence")
+    @SequenceGenerator(name = "address_sequence", sequenceName = "address_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_sequence")
-    private String id;
+    private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Locality locality;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Street street;
 
     @NotBlank

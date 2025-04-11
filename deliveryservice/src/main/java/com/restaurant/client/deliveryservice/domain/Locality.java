@@ -12,7 +12,7 @@ import java.util.List;
 public class Locality {
 
     @Id
-    @SequenceGenerator(name = "locality_sequence", sequenceName = "locality_sequence")
+    @SequenceGenerator(name = "locality_sequence", sequenceName = "locality_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "locality_sequence")
     private Long id;
 
@@ -20,9 +20,10 @@ public class Locality {
     private String name;
 
     @Enumerated(EnumType.STRING)
-    private LocalityType localityType;
+    @Column(columnDefinition = "varchar(50) default 'CITY'")
+    private LocalityType localityType = LocalityType.CITY;
 
-    @OneToMany(mappedBy = "locality", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "locality", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<Street> streetList;
 
 }

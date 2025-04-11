@@ -9,7 +9,7 @@ spring:
     drop-first: true
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
 
 server:
   port: 8083
