@@ -1,0 +1,5 @@
+CREATE DATABASE clients;
+
+CREATE DATABASE deliveries;
+
+CREATE DATABASE menu;

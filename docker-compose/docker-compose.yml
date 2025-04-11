@@ -1,6 +1,10 @@
 services:
   menu-service:
-    image: menu-service
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
+    container_name: menu-service
     build:
       context: ../menu-service
       dockerfile: ../menu-service/Dockerfile
@@ -8,27 +12,69 @@ services:
       - "8081:8081"
     env_file:
       - ../menu-service/.env
+    networks:
+      - elk
     depends_on:
-      - menu-db
-      - elasticsearch
+      database:
+        condition: service_started
+      elasticsearch:
+        condition: service_started
+      logstash:
+        condition: service_started
+    links:
+      - database
       - logstash
 
-  menu-db:
+  client-service:
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
+    container_name: client-service
+    build:
+      context: ../clientservice
+      dockerfile: ../clientservice/Dockerfile
+    ports:
+      - "8082:8082"
+    env_file:
+      - ../clientservice/.env
+    networks:
+      - elk
+    depends_on:
+      database:
+        condition: service_started
+      elasticsearch:
+        condition: service_started
+      logstash:
+        condition: service_started
+    links:
+      - database
+      - logstash
+
+  database:
+    deploy:
+      resources:
+        limits:
+          memory: 3000M
     image: postgres:16
     restart: always
     shm_size: 50mb
-    container_name: menu-db
-    environment:
-      POSTGRES_DB: menu
+    container_name: database
     ports:
       - "5432:5432"
+    volumes:
+      - ./db/postgres-data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     env_file:
       - ../menu-service/.env
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U $POSTGRES_USER -d $POSTGRES_DB" ]
+      test: [ "CMD-SHELL", "pg_isready -U $POSTGRES_USER $POSTGRES_DB" ]
       interval: 5s
       retries: 5
       timeout: 3s
+    networks:
+      - elk
+    hostname: database
 
 
   elasticsearch:
@@ -40,16 +86,17 @@ services:
       - bootstrap.memory_lock=true
       - xpack.security.enabled=false
       - xpack.security.audit.enabled=true
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
     ports:
       - "9200:9200"
     networks:
       - elk
+    hostname: elasticsearch
 
   kibana:
     image: docker.elastic.co/kibana/kibana:8.17.0
@@ -62,6 +109,11 @@ services:
       - elk
     depends_on:
       - elasticsearch
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
+    hostname: kibana
 
   logstash:
     image: docker.elastic.co/logstash/logstash:8.17.2
@@ -69,15 +121,19 @@ services:
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     volumes:
-      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
-      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
+      - ./logstash/config/logstash.conf:/usr/share/logstash/config/logstash.conf:ro
     networks:
       - elk
     ports:
       - "9600:9600"
-      - "5044:5044"
+      - "5000:5000"
     depends_on:
       - elasticsearch
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
+    hostname: logstash
 
 volumes:
   elasticsearch-data:
@@ -86,9 +142,3 @@ volumes:
 networks:
   elk:
     driver: bridge
-
-
-
-
-
-
